@@ -9,7 +9,7 @@ on:
 
 jobs:
   qodana:
-    runs-on: ubuntu-latest
+    runs-on: windows-2022
     permissions:
       contents: write
       pull-requests: write
@@ -19,6 +19,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
           fetch-depth: 0  # a full history is required for pull request analysis
+
+      - name: Setup .NET 8.x
+      uses: actions/setup-dotnet@v4
+      with:
+        # Semantic version range syntax or exact version of a dotnet version
+        dotnet-version: '8.x'
+      - name: Test
+        continue-on-error: true # proceed if tests fail, the report step will report the failure with more details.
+        run: dotnet test -c release /p:CoverletOutput=../.qodana/code-coverage/ /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2025.1
         with:
