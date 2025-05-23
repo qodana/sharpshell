@@ -1,0 +1,4 @@
+version: "1.0"
+ide: QDNET
+dotnet:
+  solution: sharpshell/sharpshell.sln
