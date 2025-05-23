@@ -28,7 +28,7 @@ jobs:
       - name: Test
         working-directory: ./sharpshell
         continue-on-error: true # proceed if tests fail, the report step will report the failure with more details.
-        run: dotnet test SharpShell/SharpShell.Tests/SharpShell.Tests.csproj -c release /p:CoverletOutput=../../.qodana/code-coverage/ /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
+        run: dotnet test SharpShell.Tests/SharpShell.Tests.csproj -c release /p:CoverletOutput=../../.qodana/code-coverage/ /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2025.1
         with:
