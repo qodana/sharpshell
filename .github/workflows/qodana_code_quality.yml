@@ -26,6 +26,7 @@ jobs:
         # Semantic version range syntax or exact version of a dotnet version
           dotnet-version: '8.x'
       - name: Test
+        working-directory: ./sharpshell
         continue-on-error: true # proceed if tests fail, the report step will report the failure with more details.
         run: dotnet test -c release /p:CoverletOutput=../.qodana/code-coverage/ /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
       - name: 'Qodana Scan'
